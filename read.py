@@ -24,3 +24,11 @@ for d in data:	# data list 中一筆一筆review叫出來 d: string, data: list
 print('There are total %d reviews with length less than 100' %len(new))
 print(new[0])	# print first review after filtering
 print(new[0])	# print second review after filtering
+
+# filter review with 'good'
+good = []
+for d in data:
+	if 'good' in d:	   # in 
+		good.append(d)
+print("There are %d reviews that mention 'good'" %len(good))
+print(good[0])
