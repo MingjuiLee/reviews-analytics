@@ -1,4 +1,5 @@
 # 讀取留言檔 read reviews
+import time
 data = []
 count = 0
 
@@ -26,9 +27,27 @@ print(new[0])	# print first review after filtering
 print(new[0])	# print second review after filtering
 
 # filter review with 'good'
+start_1 = time.time()
 good = []
 for d in data:
 	if 'good' in d:	   # in 
-		good.append(d)
+		good.append(d)	# put this particular review in list
 print("There are %d reviews that mention 'good'" %len(good))
 print(good[0])
+end_1 = time.time()
+print("Basic version time: %f" %(end_1 - start_1))
+
+# list comprehension, filtering with one line
+start_2 = time.time()
+good_2 = [d for d in data if 'good' in d]
+end_2 = time.time()
+print("Advanced version time: %f" %(end_2 - start_2))
+
+# put a computation in front
+bad = ['bad' in d for d in data]	 # 放一個運算 True or False 共1000000筆
+print(bad[0:10])	# list comprehension 通常最前面還是放d
+
+# basic
+bad_2 = []
+for d in data:
+	bad.append('bad' in d)
