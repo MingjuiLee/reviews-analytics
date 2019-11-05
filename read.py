@@ -11,6 +11,9 @@ with open('reviews.txt', 'r') as f:
 			print(len(data))	# print current progess
 print('File reading is completed, total %d data' %(len(data)))
 
+print(data[0])
+
+
 sum_len = 0
 for d in data:	# d is a string
 	sum_len += len(d)	# count len for all d
@@ -51,3 +54,38 @@ print(bad[0:10])	# list comprehension 通常最前面還是放d
 bad_2 = []
 for d in data:
 	bad.append('bad' in d)
+
+# word counts
+wc = {}	# word_counts
+# nested for loop
+for d in data:	# 1000000 reviews中的一則留言
+	words = d.split()	# split 的預設值就是空白, 而且遇到   三個空白 就不會出現100萬次的''空字串
+	for word in words:	# 一則review中的每一個string
+		if word in wc:	# check this word presents or not
+			wc[word] += 1	# already in dictionary, plus 1
+		else:			# never present
+			wc[word] = 1	# initial = 1, add new key to dictionary
+	#break	# 只會走一回
+
+for word in wc:
+	if wc[word] > 1000000:
+		print(word, wc[word])	# key = word, wc[word] = value 次數
+
+print(len(wc))	# length of dictionary, how many key in dictionary
+#print(wc)	# maybe 印不完 command + c to stop
+
+# let user to input a word to look up in the dictionary
+print(wc['Allen'])	# value = 499
+
+while True:
+	word = input('Pleas enter the word you would like to look up: ')
+	if word == 'q':
+		break
+	if word in wc:
+		print('%s shows up %d times' %(word, wc[word]))
+	else:
+		print('This word never exists!')
+print('Thank you for using this look up function')
+
+# 有一行程式碼可以把出現次數多寡按照順序排列
+# ''空字串, 連續使用三個   空格 得到''''''
